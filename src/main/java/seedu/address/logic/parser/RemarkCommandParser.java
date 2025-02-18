@@ -8,7 +8,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Remark;
 
+/**
+ * Parses input arguments and creates a {@code RemarkCommand} object.
+ */
 public class RemarkCommandParser implements Parser<RemarkCommand> {
 
     @Override
@@ -23,6 +27,6 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
                     RemarkCommand.MESSAGE_USAGE), ive);
         }
         String remark = argMultiMap.getValue(PREFIX_REMARK).orElse("");
-        return new RemarkCommand(index, remark);
+        return new RemarkCommand(index, new Remark(remark));
     }
 }
