@@ -100,7 +100,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-//                && remark.equals(otherPerson.remark) // ModelManager object hash changes if remark is added..
+                // && remark.equals(otherPerson.remark) // ModelManager object hash changes if remark is added..
                 && tags.equals(otherPerson.tags);
     }
 
