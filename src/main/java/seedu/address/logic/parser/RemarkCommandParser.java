@@ -1,18 +1,20 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Remark;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+/**
+ * Class for the parser of the {@code RemarkCommand}.
+ */
 public class RemarkCommandParser implements Parser {
 
-    final static Prefix PREFIX_REMARK = new Prefix("r/");
+    static final Prefix PREFIX_REMARK = new Prefix("r/");
 
     /**
      * Parses {@code args} into a command and returns it.

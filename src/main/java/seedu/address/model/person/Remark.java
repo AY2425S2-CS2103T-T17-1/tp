@@ -2,8 +2,11 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Class representing a remark.
+ */
 public class Remark {
-     public final String value;
+    public final String value;
 
     /**
      * Constructs an {@code Remark}.
