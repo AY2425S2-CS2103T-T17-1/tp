@@ -317,6 +317,107 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System**: `Notarius`
 
+**Actor**: `Lawyer`
+
+**Use Case**: `UC01 - Deleting a contact`
+
+**Guarantee**: `If MSS reaches step 4, the requested contact will be deleted`
+
+**MSS**:
+1. User requests to list contacts
+2. Notarius displays a list of contacts
+3. User requests to delete a specific contact in the list
+4. Notarius deletes the contact and confirms that the contact has been deleted
+
+   Use case ends.
+
+**Extensions**:
+* 1a. Notarius is unable to find the specified contact.
+  * 1a1. Notarius alerts the user about the error.
+  * 1a2. User retypes the command.
+  * Steps 1a-1a2 are repeated until the contact specified exists.
+  * Use case resumes from step 4.
+
+* 1b. Notarius uncovers an empty field description.
+  * 1b1. Notarius alerts the user about the issue.
+  * 1b2. User retypes the command with a non-empty value for the specified field.
+  * Steps 1b-1b2 are repeated until the field is no longer empty.
+  * Use case resumes from step 4.
+
+* 1c. Notarius uncovers an invalid contact identifier.
+  * 1c1. Notarius alerts the user about the issue.
+  * 1c2. User retypes the command with a valid contact identifier format.
+  * Steps 1c-1c2 are repeated until the contact identifier is valid.
+  * Use case resumes from step 4.
+
+
+**System**: `Notarius`
+
+**Actor**: `Lawyer`
+
+**Use Case**: `UC02 - Finding a particular contact by name`
+
+**Guarantee**: `If MSS reaches step 2, the contact will return a list of contacts whose names contain the keyword the user entered`
+
+**MSS**:
+1. User enters the keyword that the person’s name contains
+2. Notarius shows the corresponding results
+
+   Use case ends.
+
+**Extensions**:
+* 1a. Notarius uncovers that the user wrote an empty input.
+  * 1a1. Notarius alerts the user of the error.
+  * 1a2. User retypes the command .
+  * Steps 1a-1b are repeated until the user input is not empty.
+  * Use case resumes from step 2.
+
+
+
+
+**System**: `Notarius`
+
+**Actor**: `Lawyer`
+
+**Use Case**: `UC03 - Editing a contact`
+
+**Guarantees**: `If MSS reaches step 2, the contact will have the specified field updated correctly to the new value`
+
+**MSS**:
+1. User requests to edit field of a contact given by their id
+2. Notarius updates that field to the new value and confirms the contact has been edited
+
+   Use case ends.
+
+**Extensions**:
+* 1a. Notarius is unable to find the specified contact.
+  * 1a1. Notarius alerts the user about the error.
+  * 1a2. User retypes the command.
+  * Steps 1a-1a2 are repeated until the contact specified exists.
+  * Use case resumes from step 2.
+
+* 1b. Notarius uncovers an empty field description.
+  * 1b1. Notarius alerts the user about the issue.
+  * 1b2. User retypes the command with a non-empty value for the specified field.
+  * Steps 1b-1b2 are repeated until the field is no longer empty.
+  * Use case resumes from step 2.
+
+* 1c. Notarius uncovers that the format of the field the user entered is invalid.
+  * 1c1. Notarius alerts the user about the error.
+  * 1c2. User retypes the command with a valid field format.
+  * Steps 1c-1c2 are repeated until the field format is valid.
+  * Use case resumes from step 2.
+
+* 1d. Notarius uncovers an invalid contact identifier.
+  * 1d1. Notarius alerts the user about the issue.
+  * 1d2. User retypes the command with a valid contact identifier format.
+  * Steps 1d-1d2 are repeated until the contact identifier is valid.
+  * Use case resumes from step 2.
+
+
+
+**System**: `Notarius`
+
 **Use Case**: `UC04 - Adding a note to contact`
 
 **Actor**: `User`
