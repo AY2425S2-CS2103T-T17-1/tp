@@ -13,15 +13,12 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 
-
 /**
  * Changes the remark of an existing person in the address book.
  */
 public class RemarkCommand extends Command {
 
     public static final String COMMAND_WORD = "remark";
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the person identified "
             + "by the index number used in the last person listing. "
@@ -31,6 +28,8 @@ public class RemarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_REMARK + "Likes to swim.";
 
+    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
+    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
 
     private final Index index;
     private final Remark remark;
@@ -54,8 +53,7 @@ public class RemarkCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), remark, personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
@@ -65,13 +63,12 @@ public class RemarkCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether
-     * the remark is added to or removed from
+     * Generates a command execution success message based on whether the remark is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+        return String.format(message, personToEdit);
     }
 
     @Override
