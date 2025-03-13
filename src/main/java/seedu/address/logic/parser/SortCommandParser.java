@@ -33,22 +33,22 @@ public class SortCommandParser implements Parser<SortCommand> {
 
     private Comparator<Person> parseComparatorForKeywords(String keyword) throws ParseException {
         switch (keyword) {
-            case "n":
-                return new Comparator<Person>() {
-                    @Override
-                    public int compare(Person person1, Person person2) {
-                        return person1.getName().toString().compareTo(person2.getName().toString());
-                    }
-                };
-            case "p":
-                return new Comparator<Person>() {
-                    @Override
-                    public int compare(Person person1, Person person2) {
-                        return person1.getPhone().toString().compareTo(person2.getPhone().toString());
-                    }
-                };
-            default:
-                throw new ParseException(SortCommand.MESSAGE_UNIDENTIFIED_KEYWORD);
+        case "n":
+            return new Comparator<Person>() {
+                @Override
+                public int compare(Person person1, Person person2) {
+                    return person1.getName().toString().compareTo(person2.getName().toString());
+                }
+            };
+        case "p":
+            return new Comparator<Person>() {
+                @Override
+                public int compare(Person person1, Person person2) {
+                    return person1.getPhone().toString().compareTo(person2.getPhone().toString());
+                }
+            };
+        default:
+            throw new ParseException(SortCommand.MESSAGE_UNIDENTIFIED_KEYWORD);
         }
     }
 }

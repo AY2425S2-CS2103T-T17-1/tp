@@ -123,15 +123,19 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.add(0, toPin);
     }
 
+    /**
+     * Sort the contact list.
+     * @param prefix
+     */
     public void sortBy(Prefix prefix) {
         String field = prefix.getPrefix();
 
         switch (field.toLowerCase()) {
-            case "name":
-                sortByFieldName();
-                break;
-            default:
-                break;
+        case "name":
+            sortByFieldName();
+            break;
+        default:
+            break;
         }
     }
 

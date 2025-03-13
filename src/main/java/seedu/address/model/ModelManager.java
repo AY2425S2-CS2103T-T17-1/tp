@@ -147,14 +147,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateSortedPersonList(Comparator<Person> comparator) {
-        requireNonNull(comparator);
-        filteredPersons.setPredicate(null);
-        sortedFilteredPersons.setComparator(comparator);
-
-    }
-
-    @Override
     public void addPastCommandInput(String rawCommandInput) {
         pastCommands.addInput(rawCommandInput);
     }

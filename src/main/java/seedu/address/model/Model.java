@@ -87,8 +87,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    void updateSortedPersonList(Comparator<Person> comparator);
-
     /**
      * Adds a past command input to the list of past command inputs.
      *
