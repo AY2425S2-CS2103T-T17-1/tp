@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -96,6 +97,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void pinPerson(Person person) {
         persons.pinPerson(person);
+    }
+
+    public void updateSortedList(Prefix prefix) {
+        persons.sortBy(prefix);
     }
 
     //// util methods

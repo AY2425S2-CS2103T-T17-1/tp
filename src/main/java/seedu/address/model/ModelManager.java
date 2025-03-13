@@ -4,13 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,6 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final InputHistory pastCommands;
+    private final SortedList<Person> sortedFilteredPersons;
 
 
     /**
@@ -37,6 +41,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         pastCommands = new InputHistory();
+        sortedFilteredPersons = new SortedList<>(filteredPersons);
     }
 
     public ModelManager() {
@@ -119,6 +124,10 @@ public class ModelManager implements Model {
         addressBook.pinPerson(person);
     }
 
+    public void updateSortedPersonList(Prefix prefix) {
+        addressBook.updateSortedList(prefix);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -127,13 +136,22 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return sortedFilteredPersons;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        sortedFilteredPersons.setComparator(null);
+    }
+
+    @Override
+    public void updateSortedPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        filteredPersons.setPredicate(null);
+        sortedFilteredPersons.setComparator(comparator);
+
     }
 
     @Override

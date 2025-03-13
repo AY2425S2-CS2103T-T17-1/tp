@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
 /**
@@ -85,6 +87,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    void updateSortedPersonList(Comparator<Person> comparator);
+
     /**
      * Adds a past command input to the list of past command inputs.
      *
@@ -99,4 +103,6 @@ public interface Model {
     ObservableList<String> getCommandInputHistoryList();
 
     void pinPerson(Person personToPin);
+
+    void updateSortedPersonList(Prefix prefix);
 }
