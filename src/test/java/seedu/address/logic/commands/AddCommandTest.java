@@ -172,6 +172,11 @@ public class AddCommandTest {
         public ObservableList<String> getCommandInputHistoryList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateSortedFilteredPersonList(String prefix) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

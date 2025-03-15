@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -23,6 +24,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final InputHistory pastCommands;
+    private final ObservableList<Person> personList;
+    private final SortedList<Person> sortedFilteredPersons;
 
 
     /**
@@ -37,6 +40,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         pastCommands = new InputHistory();
+        this.personList = addressBook.getPersonList();
+        sortedFilteredPersons = new SortedList<>(filteredPersons);
     }
 
     public ModelManager() {
@@ -127,7 +132,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return sortedFilteredPersons;
     }
 
     @Override
@@ -146,6 +151,21 @@ public class ModelManager implements Model {
         return pastCommands.getPastCommands();
     }
 
+    //=========== Sorted Person List Accessors =============================================================
+
+    /**
+     * Updates the sorted and filtered person list based on the given prefix.The prefix is used to
+     * filter the list of persons in the address book and sort the resulting filtered list.
+     *
+     * @param prefix The string prefix used to filter and sort the person list.
+     * @throws NullPointerException if prefix is null.
+     */
+    @Override
+    public void updateSortedFilteredPersonList(String prefix) {
+        requireNonNull(prefix);
+        addressBook.updateSortedList(prefix);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -160,7 +180,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                //&& filteredPersons.equals(otherModelManager.filteredPersons);
+                && sortedFilteredPersons.equals(otherModelManager.sortedFilteredPersons);
     }
-
 }

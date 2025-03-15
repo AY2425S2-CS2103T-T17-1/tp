@@ -7,7 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,6 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class AddressBookTest {
 
@@ -42,6 +44,15 @@ public class AddressBookTest {
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
+
+    private AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person p : TypicalPersons.getTypicalPersons()) {
+            ab.addPerson(p);
+        }
+        return ab;
+    }
+
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
@@ -103,6 +114,21 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+    }
+
+    @Test
+    public void updateSortedList_sortByPrefix_updatesCorrectly() {
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(BENSON);
+        addressBook.addPerson(ALICE);
+        addressBook.addPerson(CARL);
+
+        addressBook.updateSortedList("n/");
+
+        ObservableList<Person> personList = addressBook.getPersonList();
+        assertEquals("Alice Pauline", personList.get(0).getName().toString());
+        assertEquals("Benson Meier", personList.get(1).getName().toString());
+        assertEquals("Carl Kurz", personList.get(2).getName().toString());
     }
 
 }

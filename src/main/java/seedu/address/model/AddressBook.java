@@ -98,6 +98,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.pinPerson(person);
     }
 
+    /**
+     * Updates the list of persons in the address book by sorting them based on the given prefix.
+     *
+     * @param prefix The prefix used for sorting of the person list.
+     */
+    public void updateSortedList(String prefix) {
+        persons.sortBy(prefix);
+    }
+
     //// util methods
 
     @Override

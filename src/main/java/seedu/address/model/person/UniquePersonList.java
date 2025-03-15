@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -164,5 +165,67 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    /**
+     * Sorts the list of persons based on the specified prefix such as name, phone number, email address, address, tags.
+     *
+     * @param prefix The prefix indicates the sorting criteria.
+     */
+    public void sortBy(String prefix) {
+        switch (prefix) {
+        case "n/":
+            sortByName();
+            break;
+        case "p/":
+            sortByPhoneNumber();
+            break;
+        case "e/":
+            sortByEmailAddress();
+            break;
+        case "a/":
+            sortByAddress();
+            break;
+        case "t/":
+            sortByTags();
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * Sort the list by name.
+     */
+    private void sortByName() {
+        internalList.sort(Comparator.comparing(p -> p.getName().toString()));
+    }
+
+    /**
+     * Sort the list by phone number.
+     */
+    private void sortByPhoneNumber() {
+        internalList.sort(Comparator.comparing(p -> Integer.parseInt(p.getPhone().toString())));
+    }
+
+    /**
+     * Sort the list by email address.
+     */
+    private void sortByEmailAddress() {
+        internalList.sort(Comparator.comparing(p -> p.getEmail().toString()));
+    }
+
+    /**
+     * Sort the list by address.
+     */
+    private void sortByAddress() {
+        internalList.sort(Comparator.comparing(p -> p.getAddress().toString()));
+    }
+
+    /**
+     * Sort the list by tags.
+     */
+    private void sortByTags() {
+        internalList.sort(Comparator.comparing(p -> p.getTags().toString()));
     }
 }

@@ -185,4 +185,52 @@ public class UniquePersonListTest {
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
     }
+
+    @Test
+    public void sortBy_namePrefix_sortsByName() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.sortBy("n/");
+        assertEquals(ALICE, uniquePersonList.asUnmodifiableObservableList().get(0));
+    }
+
+    @Test
+    public void sortBy_phonePrefix_sortsByPhone() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.sortBy("p/");
+        assertEquals(BOB, uniquePersonList.asUnmodifiableObservableList().get(0));
+    }
+
+    @Test
+    public void sortBy_emailPrefix_sortsByEmail() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.sortBy("e/");
+        assertEquals(ALICE, uniquePersonList.asUnmodifiableObservableList().get(0));
+    }
+
+    @Test
+    public void sortBy_addressPrefix_sortsByAddress() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.sortBy("a/");
+        assertEquals(ALICE, uniquePersonList.asUnmodifiableObservableList().get(0));
+    }
+
+    @Test
+    public void sortBy_tagsPrefix_sortsByTags() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.sortBy("t/");
+        assertEquals(BOB, uniquePersonList.asUnmodifiableObservableList().get(0));
+    }
+
+    @Test
+    public void sortBy_invalidPrefix_doesNothing() {
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(ALICE);
+        uniquePersonList.sortBy("invalidPrefix");
+        assertEquals(BOB, uniquePersonList.asUnmodifiableObservableList().get(0));
+    }
 }
