@@ -45,7 +45,9 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        model.addPastCommandInput(commandText);
+        if (!commandText.isBlank()) {
+            model.addPastCommandInput(commandText);
+        }
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);

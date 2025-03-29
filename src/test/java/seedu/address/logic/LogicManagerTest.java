@@ -104,6 +104,20 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_blankCommandInputs_notStoredInHistory() {
+        String[] dummyCommands = {"", " ", "\r\n", "\t", "\n"};
+
+        for (String dummyCommand : dummyCommands) {
+            try {
+                logic.execute(dummyCommand);
+            } catch (CommandException | ParseException ignored) {
+                // Ignored as invalid inputs should also be saved to history.
+            }
+        }
+        assertEquals(Collections.emptyList(), logic.getCommandHistoryList());
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
