@@ -142,7 +142,8 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void prioritisePins() {
         int pinnedIndex = 0;
-        for (Person person : internalList) {
+        for (int i = 0; i < internalUnmodifiableList.size(); i++) {
+            Person person = internalUnmodifiableList.get(i);
             if (person.getPin().isPinned()) {
                 int index = internalList.indexOf(person);
                 internalList.remove(index);
