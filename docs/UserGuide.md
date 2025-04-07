@@ -56,17 +56,17 @@ Here is a list of commonly used terminology to provide better clarity.
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-T17-1/tp/releases).<br>
-   * Under `Assets` of the latest release, click on `Notarius.jar` to download it.
+   * Under `Assets` of the latest release, click on `[CS2103T-T17-1][Notarius].jar` to download it.
 
 1. Copy the file to an empty folder where you want to store all your contact information for Notarius.
 
 1. Follow the steps for your device:
 
 
+
 <div markdown="block" class="alert alert-info">
 <img src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white" alt="Windows badge" />
-
-
+    
 1. Copy the path of the folder
     - Right-click the folder and select "Copy as Path".
 
@@ -84,6 +84,7 @@ Here is a list of commonly used terminology to provide better clarity.
 
 <img src="https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=white" alt="macOS badge" />
 
+<div markdown="block" class="alert alert-info">MacOS
 
 1. Copy the path of the folder
     - Right-click the folder, hold Opt, then click "Copy (folder name) as Pathname".
@@ -356,8 +357,7 @@ Format: `find [n/"NAME" "MORE_NAMES"] [p/"PHONE" "MORE_PHONES"]
 * You can search by `name`, `phone number`, `email`, `address`, or `tags`.<br><br>
 * Allows small typos for `name`, `email` and `address` fields:
     - e.g. Searching for `David av` will match `David Li`.
-    - Searching for `Bbo@example.com` will match `Bob@example.com.`
-* Supports OR search: At least one field must match any of the provided keywords.<br><br>
+    - Searching for `Bbo@example.com` will match `Bob@example.com.`<br><br>
 * If no prefix (e.g. n/) is given, find by name is assumed.
     * e.g. `find Alice Bernice` is treated as `find n/"Alice" "Bernice"`<br><br>
 * Supports multiple entries per field:
@@ -367,9 +367,9 @@ Format: `find [n/"NAME" "MORE_NAMES"] [p/"PHONE" "MORE_PHONES"]
 
 Examples:
 * `find Alex` returns `Alex Yeoh`
-* `find p/"87438807" "91031282"` returns `Alex Yeoh` and `David Li`
-* `find n/"Alxe" "Davdi"` returns `Alex Yeoh`, `David Li`<br>
-
+* `find n/"Alxe" "Davdi"` returns `Alex Yeoh`, `David Li`
+* `find p/"87438807" "91031282"` returns `Alex Yeoh` and `David Li`<br>
+![findAlexDavidResult.png](images/findAlexDavidResult.png)
 
 #### Deleting client contact(s) : `delete`
 
