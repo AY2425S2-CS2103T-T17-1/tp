@@ -57,7 +57,7 @@ Model --> EditCommand : person updated
 deactivate Model
 
 EditCommand -> Model : updateFilteredPersonList(...)
-EditCommand -> Model : commitAddressBook()
+EditCommand -> Model : commit()
 
 create CommandResult
 EditCommand -> CommandResult : new CommandResult("Edited Person: ...")
