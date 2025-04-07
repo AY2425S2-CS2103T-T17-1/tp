@@ -66,7 +66,7 @@ Here is a list of commonly used terminology to provide better clarity.
 <div markdown="block" class="alert alert-info">
 <h4>
   <span style="vertical-align: middle;">
-    <img src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white" alt="macOS badge" />
+    <img src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white" alt="Windows badge" />
   </span>
   <strong></strong>
 </h4>
