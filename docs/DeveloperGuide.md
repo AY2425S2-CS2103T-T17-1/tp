@@ -239,6 +239,17 @@ all contacts by the target prefix.
 6. The `execute` method of the `SortCommand` object returns a `CommandResult` object which stores the data regarding 
 the completion of the `sort` command.
 
+#### Design Considerations
+
+* Sorting Commands
+  * Sorting commands should be easy for users to understand and having consistent naming conventions.
+* Multi-level Sorting with Tags as First Attribute
+  * Tags often represent the most significant context about a contact. Sorting by tags first allows user to immediately group contacts into logical clusters. 
+  Within the cluster, sorting by other attributes provides a nested, hierarchically meaningful structure.
+  * Provides flexibility for users to organize and sort their contacts based on two attributes, the first attribute should be `tag`, second attribute should be `name`, `phone`, `email`, `address`.
+* Sorting with more than two attributes (Not Implemented)
+  * It will be overcomplicated for the system and the user, making it less intuitive and not user-friendly.
+
 ### Find feature
 
 The `find` command allows users to search for contacts in Notarius based on specified fields: 
@@ -267,13 +278,39 @@ Additionally, for name, email, and address fields, the search is tolerant of min
 
 #### Design Considerations
 
-* Lenient Matching Using Levenshtein Distance
-    * The `find` command supports typo-tolerant search using Levenshtein distance, 
-but only for fields where user errors are likely—such as `name`, `email`, and `address`. <br>
-    * This was a deliberate design choice to improve usability, allowing users to find contacts even with small typing mistakes.
-* Default Field Matching Behavior
-  * If no prefix is provided (e.g. `find Al`), the system assumes the user is searching by `name`.
-  * This decision was made to streamline common use cases, since most searches tend to be name-based.
+**Aspect: Lenient Matching Using Levenshtein Distance**
+* **Alternative 1 (Current choice):** Apply typo-tolerant search (Levenshtein distance) to selected fields (`name`, `email`, `address`)<br>
+  * Pros: 
+    * Enhances usability by allowing users to find contacts even with small typing mistakes. 
+    * Applied only to fields where user errors are common, maintaining accuracy for fields like `phone`.
+  * Cons:
+    * May return unexpected matches (e.g. searching `find 10` returning `David Li`).
+    * Slightly increases computational complexity of the search.<br>
+ 
+* **Alternative 2:** Enforce strict, exact-match search for all fields<br>
+  * Pros: 
+    * Predictable and unambiguous results.
+    * Simpler and faster to implement.
+  * Cons:
+    * Less forgiving for users who make typos.
+    * May frustrate users if exact spelling is unknown.<br><br>
+
+
+**Aspect: Default Field Matching When No Prefix is Provided**
+* **Alternative 1 (Current choice):** Assume `name` search when no prefix is specified<br>
+  * Pros: 
+    * Streamlines the common use case, since most users search by `name`. 
+    * Reduces typing effort and improves convenience.
+  * Cons: 
+    * May confuse users who expect exact prefix-based behavior.<br>
+    
+* **Alternative 2:** Require prefix for all searches (e.g. `find n/"Al"`)
+  * Pros: 
+    * Unambiguous behavior, clear field targeting. 
+    * Reduces risk of misinterpreted input.
+  * Cons:
+    * Increases command verbosity. 
+    * Less convenient for users performing quick name searches.
 
 
 ### Delete feature
@@ -581,22 +618,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Use Case**: `UC02 - Finding a particular contact by name`
+**Use Case**: `UC02 - Adding client contacts`
 
-**Guarantees**: `If MSS reaches step 2, the contact will return a list of contacts whose names contain the keyword the user entered`
+**Guarantees**: `If MSS reaches step 3, the client contact is successfully added to Notarius.`
 
 **MSS**:
-1. User enters the keyword that the person’s name contains.
-2. Notarius shows the corresponding results.
+1. User opens the application and requests to add a client contact.
+2. User enters the `add` command with all required fields (e.g., name, phone number, email, and address).
+3. Notarius adds the client contact and confirms the addition.
 
    Use case ends.
 
 **Extensions**:
-* 1a. Notarius uncovers that the user wrote an empty input.
-  * 1a1. Notarius alerts the user of the error.
-  * 1a2. User retypes the command.
-  * Steps 1a-1b are repeated until the user input is not empty.
-  * Use case resumes from step 2.
+
+* 2a. User omits one or more required fields in the command.
+  * 2a1. Notarius alerts the user about the missing fields.
+  * 2a2. User retypes the command with all required fields.
+  * Use case resumes from step 3.
+
+* 2b. User enters a contact with a phone number that already exists in the system.
+  * 2b1. Notarius alerts the user that a duplicate contact exists.
+  * 2b2. User may choose to modify the phone number or cancel the action.
+  * Use case resumes from step 3 if the user modifies and resubmits the command.
+
+* 2c. User enters an invalid phone number or email format.
+  * 2c1. Notarius alerts the user about the incorrect format.
+  * 2c2. User retypes the command with valid formats.
+  * Use case resumes from step 3.
+
+* 2d. User adds optional fields (e.g., tags or notes).
+  * 2d1. Notarius includes those fields in the newly created contact.
+  * Use case resumes from step 3.
 
 
 
@@ -972,24 +1024,86 @@ allowing minor typos (up to a Levenshtein distance of 2) in the name, email, and
 **Extensions**:
 
 * 1a. User enters an invalid search format. 
-  * 1a1. Address Book alerts the user with an error message about the incorrect format. 
+  * 1a1. Notarius alerts the user with an error message about the incorrect format. 
   * 1a2. User retypes the command following the correct format.<br>
     Steps 1a1-1a2 are repeated until the command format is valid.<br>
     Use case resumes from step 2.
-* 2a. No contacts match the search criteria. 
-  * 2a1. Address Book displays a message indicating that no matching contacts were found.<br>
-    Use case ends.
-* 2b. User enters multiple search fields. 
-  * 2b1. Address Book searches for contacts that match any of the 
+* 1b. User enters multiple search fields. 
+  * 1b1. Notarius searches for contacts that match any of the 
   specified fields (name, phone, email, address, or tags).<br>
     Use case resumes from step 3.
-* 2c. User enters a keyword with minor typos in the phone or tag fields. 
-  * 2c1. Address Book does not apply typo correction for phone numbers or tags. 
-  * 2c2. If an exact match is not found, Address Book displays a message indicating no results were found.<br>
+* 1c. User enters a keyword with minor typos in the phone or tag fields. 
+  * 1c1. Notarius does not apply typo correction for phone numbers or tags. 
+  * 1c2. If an exact match is not found, Notarius displays a message indicating no results were found.<br>
     Use case ends.
-* 2d. User enters a keyword with minor typos in the name, email, or address fields. 
-  * 2d1. Address Book applies fuzzy matching (Levenshtein distance of up to 2) for name, email, and address fields.<br>
+* 1d. User enters a keyword with minor typos in the name, email, or address fields. 
+  * 1d1. Notarius applies fuzzy matching (Levenshtein distance of up to 2) for name, email, and address fields.<br>
     Use case resumes from step 3.
+
+**System**: `Notarius`
+
+**Actor**: `User`
+
+**Use Case**: `UC14 - Pinning a client contact`
+
+**Guarantees**: `If MSS reaches step 3, the client contact is marked as pinned.`
+
+**MSS**:
+
+1. User requests to pin a contact in the current contact list.
+2. User enters the `pin` command followed by the index of the contact to pin.
+3. Notarius marks the contact as pinned and confirms the action with a success message.
+
+   Use case ends.
+
+**Extensions**:
+
+* 2a. User omits the index in the pin command.
+  * 2a1. Notarius alerts the user that an index must be provided.
+  * 2a2. User retypes the command with a valid index.
+  * Use case resumes from step 3.
+
+* 2b. User enters an index that is out of range.
+  * 2b1. Notarius alerts the user that the index is invalid.
+  * 2b2. User retypes the command with a valid index.
+  * Use case resumes from step 3.
+
+* 3a. The contact is already pinned.
+  * 3a1. Notarius notifies the user that the contact is already pinned.
+  * Use case ends.
+
+
+**System**: `Notarius`
+
+**Actor**: `User`
+
+**Use Case**: `UC15 - Unpinning a client contact`
+
+**Guarantees**: `If MSS reaches step 3, the client contact is marked as unpinned.`
+
+**MSS**:
+
+1. User requests to unpin a contact in the current contact list.
+2. User enters the `unpin` command followed by the index of the contact to unpin.
+3. Notarius marks the contact as unpinned and confirms the action with a success message.
+
+   Use case ends.
+
+**Extensions**:
+
+* 2a. User omits the index in the unpin command.
+  * 2a1. Notarius alerts the user that an index must be provided.
+  * 2a2. User retypes the command with a valid index.
+  * Use case resumes from step 3.
+
+* 2b. User enters an index that is out of range.
+  * 2b1. Notarius alerts the user that the index is invalid.
+  * 2b2. User retypes the command with a valid index.
+  * Use case resumes from step 3.
+
+* 3a. The contact is already unpinned.
+  * 3a1. Notarius notifies the user that the contact is already unpinned.
+  * Use case ends.
 
 
 

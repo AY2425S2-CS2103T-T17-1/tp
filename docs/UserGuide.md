@@ -142,26 +142,26 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 ## Navigating the GUI
 
-1. At the main window, you can type the commands in the input box. The results of your commands will show up in the command output.
-2. In the **contacts list**, it will show all the contacts stored in Notarius.
+* At the main window, you can type the commands in the input box. The results of your commands will show up in the command output.
+* In the **contacts list**, it will show all the contacts stored in Notarius.
 
 <p align="center">
   <img src="images/userinterface1.png" alt="Ui" />
 </p>
 
-3. When a contact is selected, you can view more details at the **contact information card**.
+* When a contact is selected, you can view more details at the **contact information card**.
 
 <p align="center">
   <img src="images/userinterface2.png" alt="Ui" />
 </p>
 
-4. At the **contact list** on the left, you can view the name, phone number, address, email and tags of the person. When a person is pinned, the pin icon will show up.
+* At the **contact list** on the left, you can view the name, phone number, address, email and tags of the person. When a person is pinned, the pin icon will show up.
 
 <p align="center">
   <img src="images/userinterface3.png" alt="Ui" />
 </p>
 
-5. At the **contact information card** on the right, you can view the person's note.
+* At the **contact information card** on the right, you can view the person's note.
 
 <p align="center">
   <img src="images/userinterface4.png" alt="Ui" />
@@ -286,7 +286,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 </div>
 
-<br>
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
@@ -706,6 +705,7 @@ A: Please refer to the [Command Summary](#command-summary) for the list of avail
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. When specifying the index of commands that take in an `INDEX` as parameter(s) (such as `delete INDEX`, `pin INDEX`, `unpin INDEX`, `viewnote INDEX`, `edit INDEX ...`, etc.), if the `INDEX` specified is **not** a positive integer **within** the range of 1 and 2147483647 **inclusive**, the application will show "Invalid command format!" instead.
 
 --------------------------------------------------------------------------------------------------------------------
 
