@@ -1188,6 +1188,7 @@ before the previous undo was executed`
 | CLI                        | Command Line Interface.                                                                                                                                |
 | JAR                        | A packed file format used in Java that contains compiled Java code to enable easy distribution, portability, and execution.                            |
 | JSON                       | JavaScript Object Notation, a lightweight data format widely used for storing and exchanging structured data.                                          |
+| Contact Identifier         | Refers to the index shown in the contacts list                                                                                                         |
 
 --------------------------------------------------------------------------------------------------------------------
 
