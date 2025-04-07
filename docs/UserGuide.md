@@ -585,7 +585,7 @@ Redoes an undone command.
 Format: `redo`
 
 <div markdown="block" class="alert alert-info">:information_source: **Note about redoing:**<br>
-An undone command is a previously typed command that was reversed by the `undo` command <br>
+An undone command is a previously typed command that was reversed by the `undo` command.<br>
 </div>
 
 <div markdown="block" class="alert alert-warning">
@@ -714,10 +714,10 @@ A: Please refer to the [Command Summary](#command-summary) for the list of avail
 
 | Action              | Formats and Examples                                                                                                                                                                                                                                                              |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [t/ADDITIONAL TAG]…` <br> <br> Example: `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/plaintiff t/client`                                                                           |
+| **Add**             | Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> <br> Example: `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/plaintiff t/client`                                                                                              |
 | **Clear**           | Format: `clear` <br> <br> Example: `clear`                                                                                                                                                                                                                                        |
 | **Delete**          | Single-delete Format: `delete INDEX` <br> <br> Example: `delete 3` <br> <br> Ranged-delete Format: `delete i/START_INDEX-END_INDEX` <br> <br> Example: `delete i/1-2` <br> <br> Spaced-delete Format: `delete i/FIRST_INDEX [MORE_INDEXES]… ` <br> <br> Example: `delete i/1 3 5` |
-| **Edit**            | Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [t/ADDITIONAL TAG]…` <br> <br> Example: `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                   |
+| **Edit**            | Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> <br> Example: `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                      |
 | **Find**            | Format: `find [n/"NAME" "MORE_NAMES"] [p/"PHONE" "MORE_PHONES"] [e/"EMAIL" "MORE_EMAILS"] [a/"ADDRESS" "MORE_ADDRESSES"] [t/"TAG" "MORE_TAGS"]` <br> <br> Example: `find n/"James" "Jake"`                                                                                        |
 | **List**            | Format: `list` <br> <br> Example: `list`                                                                                                                                                                                                                                          |
 | **Add/Change Note** | Format: `note INDEX [nt/NOTE]` <br> <br> Example: `note 3 nt/Currently in jail.`                                                                                                                                                                                                  |
