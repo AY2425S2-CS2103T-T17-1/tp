@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
-participant "a:AddCommand" as AddCommand LOGIC_COLOR
+participant ":AddCommand" as AddCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add n/John Doe p/98765432 ...")
+[-> LogicManager : execute("add n/Notarius Law p/98765432 ...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("add n/John ...")
+LogicManager -> AddressBookParser : parseCommand("add n/Notarius Law ...")
 activate AddressBookParser
 
 create AddCommandParser
@@ -26,7 +26,7 @@ activate AddCommandParser
 AddCommandParser --> AddressBookParser : return AddCommandParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse("n/John ...")
+AddressBookParser -> AddCommandParser : parse(" n/ Notarius Law ...")
 activate AddCommandParser
 
 create AddCommand
@@ -37,24 +37,29 @@ deactivate AddCommand
 
 AddCommandParser --> AddressBookParser : return AddCommand
 deactivate AddCommandParser
+AddCommandParser -[hidden]-> AddressBookParser
 destroy AddCommandParser
 
 AddressBookParser --> LogicManager : return AddCommand
 deactivate AddressBookParser
 
-LogicManager -> AddCommand : execute(model)
+LogicManager -> AddCommand : execute(m)
 activate AddCommand
 
-AddCommand -> Model : hasPerson(toAdd)
+AddCommand -> Model : addPerson(person)
 activate Model
-Model --> AddCommand : false
+
+Model --> AddCommand
 deactivate Model
 
-AddCommand -> Model : addPerson(toAdd)
 AddCommand -> Model : commit()
+activate Model
+
+Model --> AddCommand
+deactivate Model
 
 create CommandResult
-AddCommand -> CommandResult : new CommandResult("New person added: John Doe")
+AddCommand -> CommandResult : new CommandResult("Added Person: ...")
 activate CommandResult
 CommandResult --> AddCommand : return CommandResult
 deactivate CommandResult
