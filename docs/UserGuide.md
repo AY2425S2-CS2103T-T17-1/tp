@@ -84,7 +84,6 @@ Here is a list of commonly used terminology to provide better clarity.
 
 <img src="https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=white" alt="macOS badge" />
 
-<div markdown="block" class="alert alert-info">MacOS
 
 1. Copy the path of the folder
     - Right-click the folder, hold Opt, then click "Copy (folder name) as Pathname".
