@@ -1266,6 +1266,57 @@ Each test case in this feature section (labelled "Test case") should be independ
    1. Test case: `delete i/0 7`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
+### Pinning a contact
+
+Each test case in this feature section (labelled “Test case”) should be independent.
+
+#### Pinning a single contact
+
+- **Prerequisites**:
+  - List all contacts using the `list` command. There should be at least 2 contacts. Otherwise, use the `add` command to add more.
+  - Ensure that the contact to be pinned is currently **unpinned**.
+
+- **Test case**: `pin 1`  
+  **Expected**: The first contact is pinned. The status message confirms the successful pinning. The timestamp in the status bar is updated.
+
+- **Test case**: `pin 0`  
+  **Expected**: No contact is pinned. Error message displayed in the status message. Status bar remains the same.
+
+- **Test case**: `pin`, `pin x` (where x > list size)  
+  **Expected**: No contact is pinned. Error message displayed. Status bar remains the same.
+
+#### Pinning an already pinned contact
+
+- **Test case**: `pin 1` (run twice in a row on the same contact)  
+  **Expected**: Second time, an error message is shown indicating that the contact is already pinned. No change is made. Status bar remains the same.
+
+---
+
+### Unpinning a contact
+
+Each test case in this feature section (labelled “Test case”) should be independent.
+
+#### Unpinning a single contact
+
+- **Prerequisites**:
+  - List all contacts using the `list` command. There should be at least 2 contacts.
+  - Ensure the selected contact is **pinned** beforehand.
+
+- **Test case**: `unpin 1`  
+  **Expected**: The first contact is unpinned. The status message confirms successful unpinning. Timestamp in the status bar is updated.
+
+- **Test case**: `unpin 0`  
+  **Expected**: No contact is unpinned. Error message shown in the status message. Status bar remains the same.
+
+- **Test case**: `unpin`, `unpin x` (where x > list size)  
+  **Expected**: No contact is unpinned. Error message displayed. Status bar remains the same.
+
+#### Unpinning an already unpinned contact
+
+- **Test case**: `unpin 1` (run twice in a row on the same contact)  
+  **Expected**: Second time, an error message is shown indicating that the contact is already unpinned. No change is made. Status bar remains the same.
+
+
 ### Command history
 
 Each test case in this feature section (labelled "Test case") should be independent of each other.<br>
