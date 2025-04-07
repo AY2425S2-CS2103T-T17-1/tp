@@ -38,6 +38,7 @@ deactivate HelpCommand
 
 HelpCommandParser --> AddressBookParser : return HelpCommand
 deactivate HelpCommandParser
+HelpCommandParser-[hidden]-> AddressBookParser
 destroy HelpCommandParser
 
 AddressBookParser --> LogicManager : return HelpCommand
