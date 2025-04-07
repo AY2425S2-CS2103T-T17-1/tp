@@ -730,6 +730,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Steps 1b-1b2 are repeated until the contact identifier is valid.
   * Use case resumes from step 2.
 
+* 1c. Notarius uncovers an empty specified prefix.
+  * 1c1. Notarius alerts the user about the issue.
+  * 1c2. User retypes the command with a non-empty value for the specified prefix.
+  * Steps 1c-1c2 are repeated until the prefix is no longer empty.
+  * Use case resumes from step 2.
+
 
 **System**: `Notarius`
 
