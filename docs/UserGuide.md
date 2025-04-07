@@ -206,7 +206,7 @@ Example: If the command specifies `n/NAME p/PHONE_NUMBER`,
 The index is a special parameter and refers to the index numbers shown in the displayed client contacts list.
 
 <p align="center">
-  <img src="images/IndexIndicator.png" alt="Index" />
+  <img src="images/indexindicator.png" alt="Index" />
 </p>
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Constraints:**<br>
