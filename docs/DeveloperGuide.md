@@ -793,7 +793,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**extensions**
+**Extensions**
 
 * 1a. Notarius is unable to find any command in the history.
     * 1a1. Notarius alerts the user with a message.
@@ -1367,3 +1367,13 @@ This might make it confusing for the user as they might not know which command t
 #### Planned:
 When a command is undone/redone, the command that has been undone/redone is shown in the command box.
 
+### 7. Better Command history GUI
+
+#### Current:
+The command history wrap-around scrolling might be confusing for the user especially given the current
+result output height is very small, making it inconvenient for users to navigate to past commands,
+since it may also be hard to see multiple previous input commands at once.
+
+#### Planned:
+Include in the user preferences new settings that allow the user to adjust their scroll speed, and the number of
+commands to show in the command history in the same window.
