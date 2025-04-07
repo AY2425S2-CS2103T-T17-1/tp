@@ -311,6 +311,32 @@ Additionally, for name, email, and address fields, the search is tolerant of min
     * Increases command verbosity. 
     * Less convenient for users performing quick name searches.
 
+### Add feature
+
+The `add` command allows the user to add a new client contact into Notarius.
+
+The sequence diagram below models the different components of the application involved when the user
+executes the `add` command.
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+</div>
+
+#### Implementation Details
+
+1. The user executes a command to add a contact by specifying the contact's details.
+2. The `LogicManager` receives the command and calls `AddressBookParser#parseCommand` to parse the command.
+3. The `AddressBookParser` creates an `AddCommandParser` object, and calls its `parse` method.
+4. Within the `AddCommandParser#parse` method, the command format is checked to ensure that the required prefixes are present and valid.
+5. The `parse` method of `AddCommandParser` will then create and return a new `AddCommand` object with the parsed details of the new contact to be added.
+6. `LogicManager` calls the `execute` method of the `AddCommand` object.
+7. The `AddCommand` object calls the `Model#addPerson` method to add the new contact to the list of persons in Notarius.
+
+#### Usage Examples
+
+1. The user starts Notarius
+2. The user enters the input `add n/Notarius Law p/98765432 e/email@example.com a/Blk 123 #01-01`
+3. If the email does not already exist, the client contact is created with the name `Notarius Law`, and reflected in the list of client contacts in Notarius.
 
 ### Delete feature
 
@@ -1542,3 +1568,13 @@ since it may also be hard to see multiple previous input commands at once.
 #### Planned:
 Add new settings to the user preference that allow the user to adjust the scroll speed and number of
 commands displayed in the command history window.
+
+### 8. Option to save command history to disk
+
+#### Current:
+Currently, the command history contains only the commands that were executed during the current session.
+If users accidentally close the program, then all command history is lost, which is especially problematic
+if they had entered useful commands prior.
+
+#### Planned:
+Support an option for users to save the command history to disk, so that users can access their previous commands even after closing the program.
