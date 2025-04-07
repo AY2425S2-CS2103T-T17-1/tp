@@ -732,16 +732,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Steps 3a-3a2 are repeated until the specified contact(s) exist.
   * Use case resumes from step 4.
 
-* 3b. Notarius uncovers a prefix with an empty value.
+* 3b. Notarius uncovers some invalid contact identifiers.
   * 3b1. Notarius alerts the user about the issue.
-  * 3b2. User retypes the command with a non-empty value for the specified prefix.
-  * Steps 3b-3b2 are repeated until the prefix is no longer empty.
-  * Use case resumes from step 4.
-
-* 3c. Notarius uncovers some invalid contact identifiers.
-  * 3c1. Notarius alerts the user about the issue.
-  * 3c2. User retypes the command with a valid contact identifier format.
-  * Steps 3c-3c2 are repeated until the contact identifier is valid.
+  * 3b2. User retypes the command with a valid contact identifier format.
+  * Steps 3b-3b2 are repeated until the contact identifier is valid.
   * Use case resumes from step 4.
 
 
