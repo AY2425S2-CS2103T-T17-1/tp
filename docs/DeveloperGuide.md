@@ -1548,3 +1548,13 @@ since it may also be hard to see multiple previous input commands at once.
 #### Planned:
 Add new settings to the user preference that allow the user to adjust the scroll speed and number of
 commands displayed in the command history window.
+
+### 8. Option to save command history to disk
+
+#### Current:
+Currently, the command history contains only the commands that were executed during the current session.
+If users accidentally close the program, then all command history is lost, which is especially problematic
+if they had entered useful commands prior.
+
+#### Planned:
+Support an option for users to save the command history to disk, so that users can access their previous commands even after closing the program.
