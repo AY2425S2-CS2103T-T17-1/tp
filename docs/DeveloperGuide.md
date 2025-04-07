@@ -1573,16 +1573,7 @@ since it may also be hard to see multiple previous input commands at once.
 Add new settings to the user preference that allow the user to adjust the scroll speed and number of
 commands displayed in the command history window.
 
-### 8. Show indicator of client contact having a non-blank note
-
-#### Current:
-There is no indication of whether a client contact has a non-blank note. For lawyers with many client contacts,
-they may forget that a client contact has a note.
-
-#### Planned:
-Add an icon to each client contact which indicates the presence of a non-blank note.
-
-### 9. Option to save command history to disk
+### 8. Option to save command history to disk
 
 #### Current:
 Currently, the command history contains only the commands that were executed during the current session.
@@ -1591,3 +1582,13 @@ if they had entered useful commands prior.
 
 #### Planned:
 Support an option for users to save the command history to disk, so that users can access their previous commands even after closing the program.
+
+### 9. Show indicator of client contact having a non-blank note
+
+#### Current:
+There is no indication of whether a client contact has a non-blank note. For lawyers with many client contacts,
+they may forget that a client contact has a note.
+
+#### Planned:
+Add an icon to each client contact which indicates the presence of a non-blank note.
+
