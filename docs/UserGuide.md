@@ -44,7 +44,7 @@ Here is a list of commonly used terminology to provide better clarity.
 | Prefix                | Prefixes are short markers that are used to specify the type of information following it. For instance, `n/` is a prefix that specifies that the data following it (up until another prefix) is the name of a client.                                                                                                       |
 | Command/Command input | A command (input) is a specific instruction that you type into the input box to tell Notarius what to do. Commands help you interact with Notarius by performing actions like adding, searching, or deleting data. Commands that do not match actions that can be performed by Notarius will be considered invalid/unknown. |
 | Index                 | Index refers to the position of a client in the list of clients displayed by Notarius. For example, an `INDEX` of 1 refers to the first client in the displayed list.                                                                                                                                                       |
-| Operating System/OS   | The type of computer software that you are using, commonly referred to as OS. Examples include **Windows**, **macOS**, and **Linux**. Click <a href="https://en.wikipedia.org/wiki/Operating_system">here</a> to learn more.                                                                                                |
+| Operating System/OS   | The type of computer software that you are using, commonly referred to as OS. Examples include **Windows**, **macOS**, and **Linux**.                                                                                                                                                                                       |
 | Whitespace Character  | Usually refer to characters entered by a user's keyboard that are not visible. Examples include spaces (by pressing space-bar), tabs (by pressing the tab key), and new lines (from pressing enter).                                                                                                                        |
 | Blank Inputs          | Inputs entered by you that are either empty or only contain whitespace characters.                                                                                                                                                                                                                                          |
 | GUI                   | Stands for graphical user interface. It is a visual way of interacting with Notarius via menus, lists, buttons, etc.                                                                                                                                                                                                        |
@@ -63,58 +63,57 @@ Here is a list of commonly used terminology to provide better clarity.
 1. Follow the steps for your device:
 
 
-<div markdown="block" class="alert alert-primary">Windows
+
+<div markdown="block" class="alert alert-info">
+<img src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white" alt="Windows badge" />
     
-    1. Copy the path of the folder
-        - Right-click the folder.
-        - Select "Copy as Path".
+1. Copy the path of the folder
+    - Right-click the folder and select "Copy as Path".
 
-    2. Open a command terminal
-        - Press Win + X, then select Terminal.
+2. Open a command terminal
+    - Press Win + X, then select Terminal.
 
-    3. Navigate to the folder
-        - Type "cd" and paste the copied path, then press Enter.
+3. Navigate to the folder
+    - Type "cd" and paste the copied path, then press Enter.
 
-    4. Run the application
-        - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
-
-
+4. Run the application
+    - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
 </div>
 
+<div markdown="block" class="alert alert-info">
 
-<div markdown="block" class="alert alert-info">MacOS
-    
-    1. Copy the path of the folder
-        - Right-click the folder, hold Opt.
-        - Click "Copy (folder name) as Pathname".
+<img src="https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=white" alt="macOS badge" />
 
-    2. Open a command terminal
-        - Press Cmd + Space to open Spotlight, type "Terminal", and press Enter.
 
-    3. Navigate to the folder
-        - Type "cd" and paste the copied path, then press Enter.
+1. Copy the path of the folder
+    - Right-click the folder, hold Opt, then click "Copy (folder name) as Pathname".
 
-    4. Run the application
-        - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
+2. Open a command terminal
+    - Press Cmd + Space to open Spotlight, type "Terminal", and press Enter.
 
+3. Navigate to the folder
+    - Type "cd" and paste the copied path, then press Enter.
+
+4. Run the application
+    - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
 </div>
 
-<div markdown="block" class="alert alert-success">Linux
-    
+<div markdown="block" class="alert alert-success">
 
-    1. Copy the path of the folder
-        - Click the address bar of the folder(this might require pressing Ctrl + L).
-        - Copy with Ctrl + C.
+<img src="https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black" alt="Linux badge" />
 
-    2. Open a command terminal
-        - Press Ctrl + Alt + T.
+1. Copy the path of the folder
+    - Click the address bar of the folder (this might require pressing Ctrl + L).
+    - Copy with Ctrl + C.
 
-    3. Navigate to the folder
-        - Type "cd" and paste the copied path, then press Enter.
+2. Open a command terminal
+    - Press Ctrl + Alt + T.
 
-    4. Run the application
-        - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
+3. Navigate to the folder
+    - Type "cd" and paste the copied path, then press Enter.
 
+4. Run the application
+    - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
 </div>
 
 
