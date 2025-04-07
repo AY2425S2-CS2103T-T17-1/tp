@@ -37,6 +37,7 @@ deactivate EditCommand
 
 EditCommandParser --> AddressBookParser : return EditCommand
 deactivate EditCommandParser
+EditCommandParser -[hidden]-> AddressBookParser
 destroy EditCommandParser
 
 AddressBookParser --> LogicManager : return EditCommand
@@ -56,7 +57,7 @@ Model --> EditCommand : person updated
 deactivate Model
 
 EditCommand -> Model : updateFilteredPersonList(...)
-EditCommand -> Model : commitAddressBook()
+EditCommand -> Model : commit()
 
 create CommandResult
 EditCommand -> CommandResult : new CommandResult("Edited Person: ...")

@@ -37,6 +37,7 @@ deactivate PinCommand
 
 PinCommandParser --> AddressBookParser : return PinCommand
 deactivate PinCommandParser
+PinCommandParser -[hidden]-> AddressBookParser
 destroy PinCommandParser
 
 AddressBookParser --> LogicManager : return PinCommand
@@ -50,20 +51,8 @@ activate Model
 Model --> PinCommand : List<Person>
 deactivate Model
 
-PinCommand -> Pin : new Pin(true)
-PinCommand -> EditPersonDescriptor : new EditPersonDescriptor()
-PinCommand -> EditPersonDescriptor : setPin(newPin)
-PinCommand -> EditPersonDescriptor : createEditedPerson(personToPin, descriptor)
-activate EditPersonDescriptor
-EditPersonDescriptor --> PinCommand : editedPerson
-deactivate EditPersonDescriptor
-
-PinCommand -> Model : setPerson(personToPin, editedPerson)
-activate Model
-Model --> PinCommand : person updated
-deactivate Model
-
-PinCommand -> Model : pinPerson(editedPerson)
+PinCommand -> Model : setPerson(old, pinned)
+PinCommand -> Model : pinPerson(pinned)
 PinCommand -> Model : commit()
 
 create CommandResult

@@ -333,7 +333,7 @@ when the user executes the `delete` command.
 6. A new `DeleteCommand` object is created with the returned set of unique indexes from the parser, and gets returned back to the `LogicManager`.
 7. The `LogicManager` calls the `execute` method of the `DeleteCommand` object.
 8. The `DeleteCommand` object calls the `Model#deletePerson` method for each of the set of unique indexes in decreasing order of the index's `zeroBasedIndex`.
-9. After all `indexes` specified have been deleted, `Model#commitAddressBook` is called on the `Model` argument to save the changes made to the list of persons in the addressbook.
+9. After all `indexes` specified have been deleted, `Model#commit` is called on the `Model` argument to save the changes made to the list of persons in the addressbook.
 
 #### Usage Examples
 
@@ -353,6 +353,104 @@ when the user executes the `delete` command.
 * **Alternative 2:** Support deletion of only one client contact at a time using a single format
     * Pros: Simpler to implement, as the command will only need to parse one index.
     * Cons: Less user-friendly, as users will have to spend more time and trouble to repeatedly type the same command to delete potentially many clients one-by-one.
+
+
+### Edit feature
+
+The `edit` command allows users to update one or more fields of a contact in Notarius.
+
+<p align="center"> <img src="images/EditSequenceDiagram.png" alt="EditCommand Sequence Diagram" /> </p> <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommand` should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.</div>
+
+#### Implementation Details
+
+1. The user inputs the `edit` command along with the index of the contact to edit, followed by any number of fields to update.
+2. The `LogicManager` receives the command and calls `AddressBookParser#parseCommand`.
+3. The `AddressBookParser` creates an `EditCommandParser` object and calls its `parse` method.
+4. The `EditCommandParser` parses the index and input fields, then creates an `EditCommand` with an `EditPersonDescriptor` holding the new field values.
+5. The `LogicManager` executes the `EditCommand`, which:
+    - Retrieves the list of filtered persons via `Model#getFilteredPersonList()`.
+    - Validates the provided index.
+    - Creates an updated `Person` using `EditPersonDescriptor#createEditedPerson()`.
+    - Replaces the existing person with the edited one via `Model#setPerson()`.
+    - Calls `Model#updateFilteredPersonList()` and `Model#commit()` to apply and save the changes.
+6. A `CommandResult` is returned to the `LogicManager`, which then displays a confirmation message.
+
+#### Usage Examples
+
+1. `edit 1 p/91234567 e/john@example.com`  
+   _Updates the phone number and email of the first contact._
+
+2. `edit 3 n/Alex Tan t/client`  
+   _Updates the name and tags of the third contact to “Alex Tan” and “client”._
+
+3. `edit 2`  
+   _Invalid: At least one field must be provided._
+
+#### Design Considerations
+
+**Aspect: How to represent editability of contact fields**
+
+* **Alternative 1 (current choice):** Use `EditPersonDescriptor` to hold only fields to be updated
+    * Pros: Efficient – only changed fields are considered; avoids unnecessary data rewriting
+    * Cons: Slightly more complex to manage null values and partial updates
+
+* **Alternative 2:** Replace entire `Person` object with a new one using all fields
+    * Pros: Simpler code, consistent object recreation
+    * Cons: Less efficient; error-prone if unnecessary data is overwritten
+
+### Pin feature
+
+The `pin` command allows users to mark a contact as important. Pinned contacts are prioritized for easier access.
+
+<p align="center">
+  <img src="images/PinSequenceDiagram.png" alt="PinCommand Sequence Diagram" />
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommand` should end at the destroy marker (X), but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.</div>
+
+#### Implementation Details
+
+1. The user inputs the `pin` command followed by the index of the contact to pin.
+2. The `LogicManager` receives the command and calls `AddressBookParser#parseCommand`.
+3. The `AddressBookParser` creates a `PinCommandParser` and calls its `parse` method.
+4. The `PinCommandParser` parses the index and creates a `PinCommand` object.
+5. The `LogicManager` then executes the `PinCommand`, which:
+    - Retrieves the list of filtered persons via `Model#getFilteredPersonList()`.
+    - Validates the provided index and retrieves the target contact.
+    - Creates an updated `Person` instance with the `pin` flag set to `true`.
+    - Replaces the old contact with the updated one using `Model#setPerson()`.
+    - Calls `Model#pinPerson()` and `Model#commit()` to persist the change.
+6. A `CommandResult` is returned to the `LogicManager`, which displays a success message.
+
+#### Usage Examples
+
+1. `pin 1`  
+   _Pins the first contact in the list._
+
+2. `pin 3`  
+   _Pins the third contact._
+
+3. `pin`  
+   _Invalid: No index provided._
+
+4. `pin 10`  
+   _Invalid: Index exceeds size of contact list._
+
+#### Design Considerations
+
+**Aspect: How to represent the "pinned" state of a contact**
+
+* **Alternative 1 (current choice):** Add a `Pin` attribute to the `Person` class
+    * Pros: Easy to check pin status directly from the `Person` object
+    * Cons: Requires updating and cloning `Person` objects on pin/unpin
+
+* **Alternative 2:** Maintain a separate list of pinned person IDs
+    * Pros: Avoids modifying `Person` objects
+    * Cons: Adds complexity for syncing across model updates and filtering
+
+**Aspect: Preventing redundant pins**
+
+* The `PinCommand` checks if a contact is already pinned. If so, it does not change the state and returns a different message (`Already pinned.`)
 
 
 ### Command history
@@ -795,7 +893,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**extensions**
+**Extensions**
 
 * 1a. Notarius is unable to find any command in the history.
     * 1a1. Notarius alerts the user with a message.
@@ -1166,6 +1264,57 @@ Each test case in this feature section (labelled "Test case") should be independ
    1. Test case: `delete i/0 7`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
+### Pinning a contact
+
+Each test case in this feature section (labelled “Test case”) should be independent.
+
+#### Pinning a single contact
+
+- **Prerequisites**:
+  - List all contacts using the `list` command. There should be at least 2 contacts. Otherwise, use the `add` command to add more.
+  - Ensure that the contact to be pinned is currently **unpinned**.
+
+- **Test case**: `pin 1`  
+  **Expected**: The first contact is pinned. The status message confirms the successful pinning. The timestamp in the status bar is updated.
+
+- **Test case**: `pin 0`  
+  **Expected**: No contact is pinned. Error message displayed in the status message. Status bar remains the same.
+
+- **Test case**: `pin`, `pin x` (where x > list size)  
+  **Expected**: No contact is pinned. Error message displayed. Status bar remains the same.
+
+#### Pinning an already pinned contact
+
+- **Test case**: `pin 1` (run twice in a row on the same contact)  
+  **Expected**: Second time, an error message is shown indicating that the contact is already pinned. No change is made. Status bar remains the same.
+
+---
+
+### Unpinning a contact
+
+Each test case in this feature section (labelled “Test case”) should be independent.
+
+#### Unpinning a single contact
+
+- **Prerequisites**:
+  - List all contacts using the `list` command. There should be at least 2 contacts.
+  - Ensure the selected contact is **pinned** beforehand.
+
+- **Test case**: `unpin 1`  
+  **Expected**: The first contact is unpinned. The status message confirms successful unpinning. Timestamp in the status bar is updated.
+
+- **Test case**: `unpin 0`  
+  **Expected**: No contact is unpinned. Error message shown in the status message. Status bar remains the same.
+
+- **Test case**: `unpin`, `unpin x` (where x > list size)  
+  **Expected**: No contact is unpinned. Error message displayed. Status bar remains the same.
+
+#### Unpinning an already unpinned contact
+
+- **Test case**: `unpin 1` (run twice in a row on the same contact)  
+  **Expected**: Second time, an error message is shown indicating that the contact is already unpinned. No change is made. Status bar remains the same.
+
+
 ### Command history
 
 Each test case in this feature section (labelled "Test case") should be independent of each other.<br>
@@ -1369,3 +1518,13 @@ This might make it confusing for the user as they might not know which command t
 #### Planned:
 When a command is undone/redone, the command that has been undone/redone is shown in the command box.
 
+### 7. Better Command history GUI
+
+#### Current:
+The command history wrap-around scrolling might be confusing for the user especially given the current
+result output height is very small, making it inconvenient for users to navigate to past commands,
+since it may also be hard to see multiple previous input commands at once.
+
+#### Planned:
+Add new settings to the user preference that allow the user to adjust the scroll speed and number of
+commands displayed in the command history window.
