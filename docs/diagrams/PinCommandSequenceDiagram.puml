@@ -37,6 +37,7 @@ deactivate PinCommand
 
 PinCommandParser --> AddressBookParser : return PinCommand
 deactivate PinCommandParser
+PinCommandParser -[hidden]-> AddressBookParser
 destroy PinCommandParser
 
 AddressBookParser --> LogicManager : return PinCommand
