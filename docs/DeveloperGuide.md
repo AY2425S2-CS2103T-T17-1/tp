@@ -653,35 +653,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case**: `UC02 - Adding client contacts`
 
-**Guarantees**: `If MSS reaches step 3, the client contact is successfully added to Notarius.`
+**Guarantees**: `If MSS reaches step 2, the client contact is successfully added to Notarius.`
 
 **MSS**:
-1. User opens the application and requests to add a client contact.
-2. User enters the `add` command with all required fields (e.g., name, phone number, email, and address).
-3. Notarius adds the client contact and confirms the addition.
+1. User requests to add a client contact.
+2. Notarius adds the client contact and confirms the addition.
 
    Use case ends.
 
 **Extensions**:
 
-* 2a. User omits one or more required fields in the command.
-  * 2a1. Notarius alerts the user about the missing fields.
-  * 2a2. User retypes the command with all required fields.
-  * Use case resumes from step 3.
+* 1a. User omits one or more required fields in the command.
+  * 1a1. Notarius alerts the user about the missing fields.
+  * 1a2. User retypes the command with all required fields.
+  * Steps 1a-1a2 are repeated until the all the required fields are specified.
+  * Use case resumes from step 2.
 
-* 2b. User enters a contact with a phone number that already exists in the system.
-  * 2b1. Notarius alerts the user that a duplicate contact exists.
-  * 2b2. User may choose to modify the phone number or cancel the action.
-  * Use case resumes from step 3 if the user modifies and resubmits the command.
+* 1b. User enters a contact with an email that already exists in the system.
+  * 1b1. Notarius alerts the user that a duplicate contact exists.
+  * 1b2. User may choose to modify the email or cancel the action.
+  * Steps 1b-1b2 are repeated until the email entered is not a duplicate.
+  * Use case resumes from step 2.
 
-* 2c. User enters an invalid phone number or email format.
-  * 2c1. Notarius alerts the user about the incorrect format.
-  * 2c2. User retypes the command with valid formats.
-  * Use case resumes from step 3.
-
-* 2d. User adds optional fields (e.g., tags or notes).
-  * 2d1. Notarius includes those fields in the newly created contact.
-  * Use case resumes from step 3.
+* 1c. User enters an invalid field.
+  * 1c1. Notarius alerts the user about the incorrect format.
+  * 1c2. User retypes the command with valid formats.
+  * Steps 1c-1c2 are repeated until the fields are valid.
+  * Use case resumes from step 2.
 
 **System**: `Notarius`
 
