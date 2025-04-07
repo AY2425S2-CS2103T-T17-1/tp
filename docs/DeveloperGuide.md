@@ -648,13 +648,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**: Lawyers
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage many client contacts.
+* Frequently interacts with those client contacts for their cases.
+* Prefer desktop apps over other types.
+* Can type fast.
+* Prefers typing to other means of input.
+* Reasonably comfortable using CLI apps.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+For lawyers who need a reliable, structured and efficient system and workflow to manage their client contacts. Designed for productivity, it minimizes time spent searching and organising client contacts.
+
+
 
 
 ### User stories
@@ -1522,3 +1526,12 @@ since it may also be hard to see multiple previous input commands at once.
 #### Planned:
 Add new settings to the user preference that allow the user to adjust the scroll speed and number of
 commands displayed in the command history window.
+
+### 8. Show Indicator of Client Contact Having a Non-Blank Note
+
+#### Current:
+There is no indication of whether a client contact has a non-blank note. For lawyers with many client contacts,
+they may forget that a client contact has a note.
+
+#### Planned:
+Add an icon to each client contact which indicates the presence of a non-blank note.
