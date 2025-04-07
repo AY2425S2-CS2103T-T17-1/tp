@@ -711,38 +711,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Guarantees**: `If MSS reaches step 4, the requested client contact(s) will be deleted`
 
 **MSS**:
-1. User requests to list contacts.
-2. Notarius displays a list of contacts.
-3. User requests to delete specific contacts in the list.
-4. Notarius deletes the contacts and confirms that the contacts have been deleted.
+1. User requests to delete specific contacts in the list.
+2. Notarius deletes the contacts and confirms that the contacts have been deleted.
 
    Use case ends.
 
 **Extensions**:
 
-* 1a. Notarius detects an invalid list command from the user.
+* 1a. Notarius is unable to find some of the specified contact(s).
   * 1a1. Notarius alerts the user about the error.
   * 1a2. User retypes the command.
-  * Steps 1a-1a2 are repeated until the command format is valid.
+  * Steps 1a-1a2 are repeated until the specified contact(s) exist.
   * Use case resumes from step 2.
 
-* 3a. Notarius is unable to find some of the specified contact(s).
-  * 3a1. Notarius alerts the user about the error.
-  * 3a2. User retypes the command.
-  * Steps 3a-3a2 are repeated until the specified contact(s) exist.
-  * Use case resumes from step 4.
+* 1b. Notarius uncovers an invalid contact identifier.
+  * 1b1. Notarius alerts the user about the issue.
+  * 1b2. User retypes the command with a valid contact identifier format.
+  * Steps 1b-1b2 are repeated until the contact identifier is valid.
+  * Use case resumes from step 2.
 
-* 3b. Notarius uncovers a prefix with an empty value.
-  * 3b1. Notarius alerts the user about the issue.
-  * 3b2. User retypes the command with a non-empty value for the specified prefix.
-  * Steps 3b-3b2 are repeated until the prefix is no longer empty.
-  * Use case resumes from step 4.
-
-* 3c. Notarius uncovers some invalid contact identifiers.
-  * 3c1. Notarius alerts the user about the issue.
-  * 3c2. User retypes the command with a valid contact identifier format.
-  * Steps 3c-3c2 are repeated until the contact identifier is valid.
-  * Use case resumes from step 4.
+* 1c. Notarius uncovers an empty specified prefix.
+  * 1c1. Notarius alerts the user about the issue.
+  * 1c2. User retypes the command with a non-empty value for the specified prefix.
+  * Steps 1c-1c2 are repeated until the prefix is no longer empty.
+  * Use case resumes from step 2.
 
 
 **System**: `Notarius`
@@ -902,7 +894,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. User requests to edit the command input with a new value.
     * 3a1. Notarius updates the selected command input with the new value.
-    * Use case resumes from step 3.
+    * Steps 3a-3a1 are repeated until the user enters the command.
+    * Use case resumes from step 4.
 
 * *a. At any time, user requests to close the command history.
     * *a1. Notarius closes the command history.
