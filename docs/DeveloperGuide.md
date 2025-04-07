@@ -711,32 +711,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Guarantees**: `If MSS reaches step 4, the requested client contact(s) will be deleted`
 
 **MSS**:
-1. User requests to list contacts.
-2. Notarius displays a list of contacts.
-3. User requests to delete specific contacts in the list.
-4. Notarius deletes the contacts and confirms that the contacts have been deleted.
+1. User requests to delete specific contacts in the list.
+2. Notarius deletes the contacts and confirms that the contacts have been deleted.
 
    Use case ends.
 
 **Extensions**:
 
-* 1a. Notarius detects an invalid list command from the user.
+* 1a. Notarius is unable to find some of the specified contact(s).
   * 1a1. Notarius alerts the user about the error.
   * 1a2. User retypes the command.
-  * Steps 1a-1a2 are repeated until the command format is valid.
+  * Steps 1a-1a2 are repeated until the specified contact(s) exist.
   * Use case resumes from step 2.
 
-* 3a. Notarius is unable to find some of the specified contact(s).
-  * 3a1. Notarius alerts the user about the error.
-  * 3a2. User retypes the command.
-  * Steps 3a-3a2 are repeated until the specified contact(s) exist.
-  * Use case resumes from step 4.
-
-* 3b. Notarius uncovers some invalid contact identifiers.
-  * 3b1. Notarius alerts the user about the issue.
-  * 3b2. User retypes the command with a valid contact identifier format.
-  * Steps 3b-3b2 are repeated until the contact identifier is valid.
-  * Use case resumes from step 4.
+* 1b. Notarius uncovers an invalid contact identifier.
+  * 1b1. Notarius alerts the user about the issue.
+  * 1b2. User retypes the command with a valid contact identifier format.
+  * Steps 1b-1b2 are repeated until the contact identifier is valid.
+  * Use case resumes from step 2.
 
 
 **System**: `Notarius`
