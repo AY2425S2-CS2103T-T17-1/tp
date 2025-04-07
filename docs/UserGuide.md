@@ -210,7 +210,7 @@ The index is a special parameter and refers to the index numbers shown in the di
 </p>
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Constraints:**<br>
-* The indexes **must be a positive integer** from 1, 2, 3, … <br><br>
+* The indexes **must be a positive whole number** from 1, 2, 3, … <br><br>
 * All specified indexes in commands must correspond to some index number shown in the displayed client contacts list
 </div>
 
