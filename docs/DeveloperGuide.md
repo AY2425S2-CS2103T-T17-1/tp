@@ -1375,5 +1375,5 @@ result output height is very small, making it inconvenient for users to navigate
 since it may also be hard to see multiple previous input commands at once.
 
 #### Planned:
-Include in the user preferences new settings that allow the user to adjust their scroll speed, and the number of
-commands to show in the command history in the same window.
+Include in the user preferences new settings that allow the user to adjust their scroll speed and customize the number of
+commands displayed in the command history window.
