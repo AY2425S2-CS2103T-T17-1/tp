@@ -1209,6 +1209,26 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding client contacts
+
+1. Adding a client contact in the contact list
+
+    1. Prerequisites: The email specified in each of the `add` commands in the test cases does not exist in the client contacts list.
+    2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` <br>
+       Expected: Adds a client contact with the name "John Doe" into the contact list and a message showing that the client contact has been added is displayed.
+
+### Editing client contacts
+1. Editing a client contact in the contact list
+
+    1. Prerequisites:  The email specified in each of the `edit` commands in the test cases does not exist in the client contacts list. 
+There should be at least 1 client contact shown in the contacts list. Otherwise, use the `add` command to add more client contacts.
+    2. Test case: `edit 1 n/Johnny Doe p/91234567 e/johndoe@example.com a/John street, block 123, #01-01 t/Corporate Law t/Defendant`<br>
+       Expected: For the 1st client contact from the top of the list, the name of the contact is edited to "Johnny Doe", the phone number of the contact is edited to "91234567"
+, the email of the contact is edited to "johndoe@example.com", the address of the contact is edited to "John street, block 123, #01-01"
+and there will be two tags on the contact which are "Corporate Law" and "Defendant". A message showing that the person has been edited is also shown.
+    3. Test case `edit 1 t/`<br>
+       Expected: There will be no tags for the 1st client contact from the top of the list. A message showing that the person has been edited is also shown.
+
 ### Deleting client contacts
 
 Each test case in this feature section (labelled "Test case") should be independent.
@@ -1406,7 +1426,7 @@ Each test case in this feature section (labelled "Test case") should be independ
 
 1. Changing a note in Notarius
 
-    1. Prerequisite for test case: There should be at least 1 client contact in the contacts list. Otherwise, use
+    1. Prerequisite for test case: There should be at least 1 client contact shown in the contacts list. Otherwise, use
     the `add` command to add more client contacts.
     2. Test case: `note 1 nt/overseas for a while` <br>
     Expected: The 1st client contact from the top of the contacts list has the note "overseas for a while".
@@ -1415,7 +1435,7 @@ Each test case in this feature section (labelled "Test case") should be independ
 ### Viewing notes
 1. Viewing a note in Notarius
 
-    1. Prerequisite for test case: There should be at least 1 client contact in the contacts list. Otherwise, use
+    1. Prerequisite for test case: There should be at least 1 client contact shown in the contacts list. Otherwise, use
        the `add` command to add more client contacts. <br>
 Change note of the 1st client contact from the top of the list to "overseas for a while" using the `note` command. <br>
 The full command for this is `note 1 nt/overseas for a while`.
