@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S2-CS2103T-T17-1/tp/blob/4923ae7bb48c7905383bca81cd029679f89ad40e/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S2-CS2103T-T17-1/tp/blob/4923ae7bb48c7905383bca81cd029679f89ad40e/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,14 +68,14 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S2-CS2103T-T17-1/tp/blob/3f2520c27a52b761b7c2310023814f52366f640c/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts such as `CommandBox`, `ResultDisplay`, `PersonListPanel`, 
 `PersonDetailPanel`, `StatusBarFooter` and `HelpWindow`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S2-CS2103T-T17-1/tp/blob/3f2520c27a52b761b7c2310023814f52366f640c/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S2-CS2103T-T17-1/tp/blob/3f2520c27a52b761b7c2310023814f52366f640c/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S2-CS2103T-T17-1/tp/blob/3f2520c27a52b761b7c2310023814f52366f640c/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T17-1/tp/blob/3f2520c27a52b761b7c2310023814f52366f640c/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -138,7 +138,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S2-CS2103T-T17-1/tp/blob/3f2520c27a52b761b7c2310023814f52366f640c/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -311,6 +311,32 @@ Additionally, for name, email, and address fields, the search is tolerant of min
     * Increases command verbosity. 
     * Less convenient for users performing quick name searches.
 
+### Add feature
+
+The `add` command allows the user to add a new client contact into Notarius.
+
+The sequence diagram below models the different components of the application involved when the user
+executes the `add` command.
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+</div>
+
+#### Implementation Details
+
+1. The user executes a command to add a contact by specifying the contact's details.
+2. The `LogicManager` receives the command and calls `AddressBookParser#parseCommand` to parse the command.
+3. The `AddressBookParser` creates an `AddCommandParser` object, and calls its `parse` method.
+4. Within the `AddCommandParser#parse` method, the command format is checked to ensure that the required prefixes are present and valid.
+5. The `parse` method of `AddCommandParser` will then create and return a new `AddCommand` object with the parsed details of the new contact to be added.
+6. `LogicManager` calls the `execute` method of the `AddCommand` object.
+7. The `AddCommand` object calls the `Model#addPerson` method to add the new contact to the list of persons in Notarius.
+
+#### Usage Examples
+
+1. The user starts Notarius
+2. The user enters the input `add n/Notarius Law p/98765432 e/email@example.com a/Blk 123 #01-01`
+3. If the email does not already exist, the client contact is created with the name `Notarius Law`, and reflected in the list of client contacts in Notarius.
 
 ### Delete feature
 
@@ -1213,6 +1239,26 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding client contacts
+
+1. Adding a client contact in the contact list
+
+    1. Prerequisites: The email specified in each of the `add` commands in the test cases does not exist in the client contacts list.
+    2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` <br>
+       Expected: Adds a client contact with the name "John Doe" into the contact list and a message showing that the client contact has been added is displayed.
+
+### Editing client contacts
+1. Editing a client contact in the contact list
+
+    1. Prerequisites:  The email specified in each of the `edit` commands in the test cases does not exist in the client contacts list. 
+There should be at least 1 client contact shown in the contacts list. Otherwise, use the `add` command to add more client contacts.
+    2. Test case: `edit 1 n/Johnny Doe p/91234567 e/johndoe@example.com a/John street, block 123, #01-01 t/Corporate Law t/Defendant`<br>
+       Expected: For the 1st client contact from the top of the list, the name of the contact is edited to "Johnny Doe", the phone number of the contact is edited to "91234567"
+, the email of the contact is edited to "johndoe@example.com", the address of the contact is edited to "John street, block 123, #01-01"
+and there will be two tags on the contact which are "Corporate Law" and "Defendant". A message showing that the person has been edited is also shown.
+    3. Test case `edit 1 t/`<br>
+       Expected: There will be no tags for the 1st client contact from the top of the list. A message showing that the person has been edited is also shown.
+
 ### Deleting client contacts
 
 Each test case in this feature section (labelled "Test case") should be independent.
@@ -1410,7 +1456,7 @@ Each test case in this feature section (labelled "Test case") should be independ
 
 1. Changing a note in Notarius
 
-    1. Prerequisite for test case: There should be at least 1 client contact in the contacts list. Otherwise, use
+    1. Prerequisite for test case: There should be at least 1 client contact shown in the contacts list. Otherwise, use
     the `add` command to add more client contacts.
     2. Test case: `note 1 nt/overseas for a while` <br>
     Expected: The 1st client contact from the top of the contacts list has the note "overseas for a while".
@@ -1419,7 +1465,7 @@ Each test case in this feature section (labelled "Test case") should be independ
 ### Viewing notes
 1. Viewing a note in Notarius
 
-    1. Prerequisite for test case: There should be at least 1 client contact in the contacts list. Otherwise, use
+    1. Prerequisite for test case: There should be at least 1 client contact shown in the contacts list. Otherwise, use
        the `add` command to add more client contacts. <br>
 Change note of the 1st client contact from the top of the list to "overseas for a while" using the `note` command. <br>
 The full command for this is `note 1 nt/overseas for a while`.
@@ -1527,7 +1573,7 @@ since it may also be hard to see multiple previous input commands at once.
 Add new settings to the user preference that allow the user to adjust the scroll speed and number of
 commands displayed in the command history window.
 
-### 8. Show Indicator of Client Contact Having a Non-Blank Note
+### 8. Show indicator of client contact having a non-blank note
 
 #### Current:
 There is no indication of whether a client contact has a non-blank note. For lawyers with many client contacts,
@@ -1535,3 +1581,13 @@ they may forget that a client contact has a note.
 
 #### Planned:
 Add an icon to each client contact which indicates the presence of a non-blank note.
+
+### 9. Option to save command history to disk
+
+#### Current:
+Currently, the command history contains only the commands that were executed during the current session.
+If users accidentally close the program, then all command history is lost, which is especially problematic
+if they had entered useful commands prior.
+
+#### Planned:
+Support an option for users to save the command history to disk, so that users can access their previous commands even after closing the program.
