@@ -64,12 +64,8 @@ Here is a list of commonly used terminology to provide better clarity.
 
 
 <div markdown="block" class="alert alert-info">
-<h4>
-  <span style="vertical-align: middle;">
-    <img src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white" alt="macOS badge" />
-  </span>
-  <strong></strong>
-</h4>
+<img src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white" alt="Windows badge" />
+
 
 1. Copy the path of the folder
     - Right-click the folder and select "Copy as Path".
@@ -85,12 +81,9 @@ Here is a list of commonly used terminology to provide better clarity.
 </div>
 
 <div markdown="block" class="alert alert-info">
-<h4>
-  <span style="vertical-align: middle;">
-    <img src="https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=white" alt="macOS badge" />
-  </span>
-  <strong></strong>
-</h4>
+
+<img src="https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=white" alt="macOS badge" />
+
 
 1. Copy the path of the folder
     - Right-click the folder, hold Opt, then click "Copy (folder name) as Pathname".
@@ -106,12 +99,8 @@ Here is a list of commonly used terminology to provide better clarity.
 </div>
 
 <div markdown="block" class="alert alert-success">
-<h4>
-  <span style="vertical-align: middle;">
-    <img src="https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black" alt="Linux badge" />
-  </span>
-  <strong></strong>
-</h4>
+
+<img src="https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black" alt="Linux badge" />
 
 1. Copy the path of the folder
     - Click the address bar of the folder (this might require pressing Ctrl + L).
