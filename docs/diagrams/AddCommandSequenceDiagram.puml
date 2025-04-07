@@ -59,7 +59,7 @@ Model --> AddCommand
 deactivate Model
 
 create CommandResult
-AddCommand -> CommandResult : new CommandResult("Added Person: ...")
+AddCommand -> CommandResult : new CommandResult("New person added: Notarius Law ...")
 activate CommandResult
 CommandResult --> AddCommand : return CommandResult
 deactivate CommandResult
