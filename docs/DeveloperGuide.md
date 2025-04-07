@@ -898,7 +898,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. User requests to edit the command input with a new value.
     * 3a1. Notarius updates the selected command input with the new value.
-    * Use case resumes from step 3.
+    * Steps 3a-3a1 are repeated until the user enters the command.
+    * Use case resumes from step 4.
 
 * *a. At any time, user requests to close the command history.
     * *a1. Notarius closes the command history.
