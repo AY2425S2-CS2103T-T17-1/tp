@@ -287,7 +287,7 @@ when the user executes the `delete` command.
 6. A new `DeleteCommand` object is created with the returned set of unique indexes from the parser, and gets returned back to the `LogicManager`.
 7. The `LogicManager` calls the `execute` method of the `DeleteCommand` object.
 8. The `DeleteCommand` object calls the `Model#deletePerson` method for each of the set of unique indexes in decreasing order of the index's `zeroBasedIndex`.
-9. After all `indexes` specified have been deleted, `Model#commitAddressBook` is called on the `Model` argument to save the changes made to the list of persons in the addressbook.
+9. After all `indexes` specified have been deleted, `Model#commit` is called on the `Model` argument to save the changes made to the list of persons in the addressbook.
 
 #### Usage Examples
 
@@ -323,7 +323,7 @@ The `edit` command allows users to update one or more fields of a contact in Not
     - Validates the provided index.
     - Creates an updated `Person` using `EditPersonDescriptor#createEditedPerson()`.
     - Replaces the existing person with the edited one via `Model#setPerson()`.
-    - Calls `Model#updateFilteredPersonList()` and `Model#commitAddressBook()` to apply and save the changes.
+    - Calls `Model#updateFilteredPersonList()` and `Model#commit()` to apply and save the changes.
 6. A `CommandResult` is returned to the `LogicManager`, which then displays a confirmation message.
 
 #### Usage Examples
