@@ -74,10 +74,10 @@ Here is a list of commonly used terminology to provide better clarity.
     - Press Win + X, then select Terminal.
 
 3. Navigate to the folder
-    - Type "cd" and paste the copied path, then press Enter.
+    - Type <code>cd</code> and paste the copied path, then press Enter.
 
 4. Run the application
-    - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
+    - Type <code>java -jar [CS2103T-T17-1][Notarius].jar</code> and press Enter.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -92,10 +92,10 @@ Here is a list of commonly used terminology to provide better clarity.
     - Press Cmd + Space to open Spotlight, type "Terminal", and press Enter.
 
 3. Navigate to the folder
-    - Type "cd" and paste the copied path, then press Enter.
+    - Type <code>cd</code> and paste the copied path, then press Enter.
 
 4. Run the application
-    - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
+    - Type <code>java -jar [CS2103T-T17-1][Notarius].jar</code> and press Enter.
 </div>
 
 <div markdown="block" class="alert alert-success">
@@ -110,10 +110,10 @@ Here is a list of commonly used terminology to provide better clarity.
     - Press Ctrl + Alt + T.
 
 3. Navigate to the folder
-    - Type "cd" and paste the copied path, then press Enter.
+    - Type <code>cd</code> and paste the copied path, then press Enter.
 
 4. Run the application
-    - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
+    - Type <code>java -jar [CS2103T-T17-1][Notarius].jar</code> and press Enter.
 </div>
 
 
