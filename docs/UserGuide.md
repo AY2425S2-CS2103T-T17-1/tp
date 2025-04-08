@@ -74,10 +74,10 @@ Here is a list of commonly used terminology to provide better clarity.
     - Press Win + X, then select Terminal.
 
 3. Navigate to the folder
-    - Type "cd" and paste the copied path, then press Enter.
+    - Type <code>cd</code> and paste the copied path, then press Enter.
 
 4. Run the application
-    - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
+    - Type <code>java -jar [CS2103T-T17-1][Notarius].jar</code> and press Enter.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -92,10 +92,10 @@ Here is a list of commonly used terminology to provide better clarity.
     - Press Cmd + Space to open Spotlight, type "Terminal", and press Enter.
 
 3. Navigate to the folder
-    - Type "cd" and paste the copied path, then press Enter.
+    - Type <code>cd</code> and paste the copied path, then press Enter.
 
 4. Run the application
-    - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
+    - Type <code>java -jar [CS2103T-T17-1][Notarius].jar</code> and press Enter.
 </div>
 
 <div markdown="block" class="alert alert-success">
@@ -110,10 +110,10 @@ Here is a list of commonly used terminology to provide better clarity.
     - Press Ctrl + Alt + T.
 
 3. Navigate to the folder
-    - Type "cd" and paste the copied path, then press Enter.
+    - Type <code>cd</code> and paste the copied path, then press Enter.
 
 4. Run the application
-    - Type "java -jar [CS2103T-T17-1][Notarius].jar" and press Enter.
+    - Type <code>java -jar [CS2103T-T17-1][Notarius].jar</code> and press Enter.
 </div>
 
 
@@ -708,6 +708,7 @@ A: Please refer to the [Command Summary](#command-summary) for the list of avail
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. When specifying the index of commands that take in an `INDEX` as parameter(s) (such as `delete INDEX`, `pin INDEX`, `unpin INDEX`, `viewnote INDEX`, `edit INDEX ...`, etc.), if the `INDEX` specified is **not** a positive integer **within** the range of 1 and 2147483647 **inclusive**, the application will show "Invalid command format!" instead.
 4. (**Some Linux computers only**) On fresh startup of the application, the size of the window cannot be modified. Only after maximising and then minimising the application, the size of the window can be modified.
+5. Performing the `help` command to open the window will not allow you to open the command history while the help window is currently open. The remedy is to simply either close the help window, or click on Notarius before continuing to use the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
